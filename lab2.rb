@@ -144,5 +144,23 @@ puts "#{winner[0]} is the Winner!"
 =end
 
 #Part 4: Anagrams
+def combine_anagrams(words)
+    result = Array.new    
+    words.each do |word|
+        matching = [word]
+        words.delete(word)
+        words.each do |compare|
+            if compare.downcase.chars.sort == word.downcase.chars.sort
+                matching.push(compare)
+                words.delete(compare)
+            end
+        end
+        result.push(matching)       
+    end
+    result = result.to_s
+end
 
-
+#Testing Part 4
+input = ['cars', 'for', 'potatoes', 'racs', 'four', 'scar', 'creams', 'scream']
+output = combine_anagrams(input)
+puts output
