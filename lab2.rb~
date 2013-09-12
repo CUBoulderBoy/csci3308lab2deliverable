@@ -44,7 +44,7 @@ end
 #count_words("A man, a plan, a canal -- Panama")
 #count_words "Doo bee doo bee doo"
 
-#Part 3A: Rock Paper Scissors - 
+#Part 3A: Rock Paper Scissors - Winner
 class WrongNumberOfPlayersError <  StandardError ; end
 class NoSuchStrategyError <  StandardError ; end
 
@@ -58,36 +58,56 @@ def rps_game_winner(game)
 
     if p1 == "r"
         if p2 == "s"
-            puts "#{game[0][0]} would win since R > S"
+            winner = "#{game[0][0]} would win since R > S"
+            puts winner
+            winner = [game[0][0], game[0][1]]
         elsif p2 == "p"
-            puts "#{game[1][0]} would win since R < P"
+            winner = "#{game[1][0]} would win since R < P"
+            puts winner
+            winner = [game[1][0], game[1][1]]
         else
-            puts "Neither would win since R == R"
+            winner = "Neither would win since R == R"
+            puts winner
+            winner = nil
         end
     elsif p1 == "s"
         if p2 == "p"
-            puts "#{game[0][0]} would win since S > P"
+            winner = "#{game[0][0]} would win since S > P"
+            puts winner
+            winner = [game[0][0], game[0][1]]
         elsif p2 == "r"
-            puts "#{game[1][0]} would win since S < R"
+            winner = "#{game[1][0]} would win since S < R"
+            puts winner
+            winner = [game[1][0], game[1][1]]
         else
-            puts "Neither would win since S == S"
+            winner = "Neither would win since S == S"
+            puts winner
+            winner = nil
         end
     else
         if p2 == "r"
-            puts "#{game[0][0]} would win since P > R"
+            winner = "#{game[0][0]} would win since P > R"
+            puts winner
+            winner = [game[0][0], game[0][1]]
         elsif p2 == "s"
-            puts "#{game[1][0]} would win since P < S"
+            winner = "#{game[1][0]} would win since P < S"
+            puts winner
+            winner = [game[1][0], game[1][1]]
         else
-            puts "Neither would win since P == P"
+            winner = "Neither would win since P == P"
+            puts winner
+            winner = nil
         end
     end
 end
 
+=begin
 #Testing Part 3A
 player1 = ["Paul", "S"]
 player2 = ["Sam", "P"]
 play_game = [player1, player2]
-rps_game_winner(play_game)
+answer = rps_game_winner(play_game)
+puts answer[1]
 
 player1 = ["Paul", "R"]
 player2 = ["Sam", "r"]
@@ -98,3 +118,28 @@ player1 = ["Paul", "p"]
 player2 = ["Sam", "S"]
 play_game = [player1, player2]
 rps_game_winner(play_game)
+=end
+
+#Part 3B: Rock Paper Scissors - Tournament
+def rps_tournament_winner(tournament)
+    if tournament[0][0].length == 2
+        winner = rps_game_winner([rps_tournament_winner(tournament[0]), rps_tournament_winner(tournament[1])])
+    else
+        winner = rps_game_winner([tournament[0], tournament[1]])
+    end
+end
+
+#Testing Part 3B
+tournament = 
+    [
+        [
+            [["Armando", "P"], ["Dave", "S"]], [["Richard", "R"], ["Michael", "S"]],
+        ],
+        [
+            [["Allen", "S"], ["Omer", "P"]], [["David E.", "R"], ["Richard X.", "P"]]
+        ]
+    ]
+winner = rps_tournament_winner(tournament)
+puts "#{winner[0]} is the Winner!"
+
+
