@@ -137,22 +137,27 @@ puts f.bar_history
 
 #Part 3A - Currency Conversion
 class Numeric
- @@currencies = {'yen' => 0.013, 'euro' => 1.292, 'rupee' => 0.019}
+    @@currencies = {'yen' => 0.013, 'euro' => 1.292, 'rupee' => 0.019}
 
- def method_missing(method_id)
-   singular_currency = method_id.to_s.gsub( /s$/, '')
-   puts singular_currency
+    def method_missing(method_id)
+        puts method_id
+        singular_currency = method_id.to_s.gsub( /s$/, '')
+        puts singular_currency
    
-   if @@currencies.has_key?(singular_currency)
-     self * @@currencies[singular_currency]
-   else
-     super
-   end
- 
- end
+        if singular_currency == "dollar"
+            self
+        elsif @@currencies.has_key?(singular_currency)
+            self * @@currencies[singular_currency]
+        else   
+            super
+        end
+    end
+    def method_missing(method_id, param)
+        puts method_id
+    end
 end
 
 
 #Part 3A Testing
-5.dollar.in(:euro)
+5.dollars.in(:euro)
 10.euros.in(:rupees)
