@@ -95,11 +95,18 @@ popcorn.jellybean_info
 class Class
     def attr_accessor_with_history(attr_name)
         attr_name = attr_name.to_s
+
         attr_reader attr_name
         attr_reader attr_name + "_history"
+
         class_eval %Q{
-                        def attr-with-history(attr_name)
-                            
+                        def #{attr_name}=(value)
+                            if self.class.superclass.#{attr_name}_history
+                                @#{attr_name}_history.push(value)
+                            else
+                                @#{attr_name}_history = Array.new()
+                                @#{attr_name}_history.push(value)
+                            end
                         end
                     }
     end
@@ -112,5 +119,12 @@ end
 #Class Class Testing
 f = Foo.new
 f.bar = 1
-#f.bar = 2
-#f.bar_history # => if your code works, should be [nil, 1, 2]
+f.bar = 2
+puts f.bar_history # => if your code works, should be [nil, 1, 2]
+
+f = Foo.new
+f.bar = 1
+f.bar = 2
+f = Foo.new
+f.bar = 4
+puts f.bar_history
