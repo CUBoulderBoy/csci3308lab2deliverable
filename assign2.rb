@@ -134,3 +134,25 @@ f = Foo.new
 f.bar = 4
 puts f.bar_history
 =end
+
+#Part 3A - Currency Conversion
+class Numeric
+ @@currencies = {'yen' => 0.013, 'euro' => 1.292, 'rupee' => 0.019}
+
+ def method_missing(method_id)
+   singular_currency = method_id.to_s.gsub( /s$/, '')
+   puts singular_currency
+   
+   if @@currencies.has_key?(singular_currency)
+     self * @@currencies[singular_currency]
+   else
+     super
+   end
+ 
+ end
+end
+
+
+#Part 3A Testing
+5.dollar.in(:euro)
+10.euros.in(:rupees)
