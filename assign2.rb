@@ -101,12 +101,14 @@ class Class
 
         class_eval %Q{
                         def #{attr_name}=(value)
-                            if self.class.superclass.#{attr_name}_history
-                                @#{attr_name}_history.push(value)
-                            else
+                            @#{attr_name} = value
+
+                            if !@#{attr_name}_history
                                 @#{attr_name}_history = Array.new()
-                                @#{attr_name}_history.push(value)
+                                @#{attr_name}_history.push("nil")
                             end
+                            
+                            @#{attr_name}_history.push(value)
                         end
                     }
     end
@@ -116,6 +118,7 @@ class Foo
     attr_accessor_with_history :bar
 end
 
+=begin
 #Class Class Testing
 f = Foo.new
 f.bar = 1
@@ -125,6 +128,9 @@ puts f.bar_history # => if your code works, should be [nil, 1, 2]
 f = Foo.new
 f.bar = 1
 f.bar = 2
+puts f.bar_history
+
 f = Foo.new
 f.bar = 4
 puts f.bar_history
+=end
