@@ -37,7 +37,7 @@ class Dessert
     end
 end
 
-#=begin
+=begin
 #Dessert Class Testing
 brownie = Dessert.new("Brownie", 500)
 puts "Dessert Name: #{brownie.name?}"
@@ -52,7 +52,7 @@ cookie.new_name = "Cheesecake"
 cookie.dessert_info
 cookie.calories = 750
 cookie.dessert_info
-#=end
+=end
 
 #Part 1B - JellyBean
 class JellyBean < Dessert
@@ -80,7 +80,7 @@ class JellyBean < Dessert
     end
 end
 
-#=begin
+=begin
 #JellyBean Class Testing
 popcorn = JellyBean.new("JellyBean", 100, "Popcorn")
 puts "JellyBean flavor: #{popcorn.flavor}"
@@ -89,6 +89,28 @@ popcorn.flavor = "Black Licorice"
 popcorn.jellybean_info
 popcorn.calories = 212
 popcorn.jellybean_info
-#=end
+=end
 
 #Part 2 - OOP
+class Class
+    def attr_accessor_with_history(attr_name)
+        attr_name = attr_name.to_s
+        attr_reader attr_name
+        attr_reader attr_name + "_history"
+        class_eval %Q{
+                        def attr-with-history(attr_name)
+                            
+                        end
+                    }
+    end
+end
+
+class Foo
+    attr_accessor_with_history :bar
+end
+
+#Class Class Testing
+f = Foo.new
+f.bar = 1
+#f.bar = 2
+#f.bar_history # => if your code works, should be [nil, 1, 2]
