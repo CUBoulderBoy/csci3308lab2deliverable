@@ -170,3 +170,14 @@ puts 5.dollars.in(:euro)
 puts 10.euros
 puts 10.euros.in(:rupees)
 =end
+
+#Part 3B: Palindromes Re-Hashed
+def palindrome?(string)
+    string = string.gsub(/[^a-z]/i, '')
+    string.downcase == string.downcase.reverse
+end
+
+#Testing Part 2A
+puts ("A man, a plan, a canal -- Panama")palindrome?
+puts palindrome?("Madam, I'm Adam!")
+puts palindrome?("Abracadabra")
