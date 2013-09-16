@@ -203,3 +203,22 @@ puts [1,2,3,4,5].palindrome?
 test_hash = {"a" => 1, "b" => 2, "c" => 3, "d" => 4, "e" => 5}
 puts test_hash.palindrome?
 =end
+
+#Part 4: Cartesian Product
+class CartesianProduct
+    include Enumerable
+    
+end
+
+#=begin
+#Part 4 Testing
+c = CartesianProduct.new([:a,:b], [4,5])
+c.each { |elt| puts elt.inspect }
+# [:a, 4]
+# [:a, 5]
+# [:b, 4]
+# [:b, 5]
+
+c = CartesianProduct.new([:a,:b], [])
+c.each { |elt| puts elt.inspect }
+#=end
