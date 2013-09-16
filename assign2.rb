@@ -140,24 +140,33 @@ class Numeric
     @@currencies = {'yen' => 0.013, 'euro' => 1.292, 'rupee' => 0.019}
 
     def method_missing(method_id)
-        puts method_id
         singular_currency = method_id.to_s.gsub( /s$/, '')
-        puts singular_currency
    
         if singular_currency == "dollar"
-            self
+            self * 1
         elsif @@currencies.has_key?(singular_currency)
             self * @@currencies[singular_currency]
         else   
             super
         end
     end
-    def method_missing(method_id, param)
-        puts method_id
+
+    def in(param)
+        singular_currency = param.to_s.gsub( /s$/, '')
+        if singular_currency == "dollar"
+            self * 1
+        elsif @@currencies.has_key?(singular_currency)
+            self / @@currencies[singular_currency]
+        else   
+            super
+        end
     end
 end
 
-
+=begin
 #Part 3A Testing
-5.dollars.in(:euro)
-10.euros.in(:rupees)
+puts 5.dollars
+puts 5.dollars.in(:euro)
+puts 10.euros
+puts 10.euros.in(:rupees)
+=end
