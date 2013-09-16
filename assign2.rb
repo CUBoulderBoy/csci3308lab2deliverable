@@ -185,3 +185,21 @@ puts "A man, a plan, a canal -- Panama".palindrome?
 puts "Madam, I'm Adam!".palindrome?
 puts "Abracadabra".palindrome?
 =end
+
+#Part 3C: Palindromes in Enumerable Format!!!
+module Enumerable
+    def palindrome?
+        self == self.reverse_each.map { |x| x }
+    end
+end
+
+=begin
+#Testing Part 3C
+puts [1,2,3,2,1].palindrome?
+test_hash = {"a" => 1, "b" => 2, "c" => 3, "b" => 2, "a" => 1}
+puts test_hash.palindrome?
+
+puts [1,2,3,4,5].palindrome?
+test_hash = {"a" => 1, "b" => 2, "c" => 3, "d" => 4, "e" => 5}
+puts test_hash.palindrome?
+=end
