@@ -207,18 +207,31 @@ puts test_hash.palindrome?
 #Part 4: Cartesian Product
 class CartesianProduct
     include Enumerable
-    
+
+    def initialize(array1, array2)
+        @product = Array.new
+
+        array1.each_entry{ |x|
+            (array2.each_entry { |y|
+                @product.push([x,y]) }
+            )
+        }
+    end
+
+    def get_product
+        @product
+    end 
 end
 
 #=begin
 #Part 4 Testing
 c = CartesianProduct.new([:a,:b], [4,5])
-c.each { |elt| puts elt.inspect }
+p c.get_product
 # [:a, 4]
 # [:a, 5]
 # [:b, 4]
 # [:b, 5]
 
 c = CartesianProduct.new([:a,:b], [])
-c.each { |elt| puts elt.inspect }
+p c.get_product
 #=end
