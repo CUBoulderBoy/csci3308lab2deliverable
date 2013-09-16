@@ -172,12 +172,16 @@ puts 10.euros.in(:rupees)
 =end
 
 #Part 3B: Palindromes Re-Hashed
-def palindrome?(string)
-    string = string.gsub(/[^a-z]/i, '')
-    string.downcase == string.downcase.reverse
+class String
+    def palindrome?
+        string = self.gsub(/[^a-z]/i, '')
+        string.downcase == string.downcase.reverse
+    end
 end
 
-#Testing Part 2A
-puts ("A man, a plan, a canal -- Panama")palindrome?
-puts palindrome?("Madam, I'm Adam!")
-puts palindrome?("Abracadabra")
+=begin
+#Testing Part 3B
+puts "A man, a plan, a canal -- Panama".palindrome?
+puts "Madam, I'm Adam!".palindrome?
+puts "Abracadabra".palindrome?
+=end
